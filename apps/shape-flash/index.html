@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#F7F2E9">
+  <title>Shape Flash</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Lexend:wght@500;600;700&family=Nunito:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../assets/css/tokens.css?v=1">
+  <link rel="stylesheet" href="../../assets/css/base.css?v=1">
+  <link rel="stylesheet" href="./flash.css?v=1">
+</head>
+<body data-game="shape-flash">
+
+  <!-- Settings -->
+  <main id="settingsScreen" class="app-shell screen">
+    <header class="app-header">
+      <div class="header-left">
+        <a class="icon-btn" href="../../index.html" data-icon="house" aria-label="Shape Lab home" title="Shape Lab home"></a>
+        <h1 class="brand-name">Shape Flash</h1>
+      </div>
+      <div class="header-actions">
+        <button id="settingsFullscreen" class="icon-btn" type="button" aria-label="Fullscreen" title="Fullscreen"></button>
+      </div>
+    </header>
+
+    <div class="settings-main">
+      <section class="panel panel--card">
+        <h2 class="panel-title">Flash Settings</h2>
+
+        <div class="control-section">
+          <div class="settings-label">Flash Speed</div>
+          <div class="toggle-group" id="speed" role="group" aria-label="Flash speed">
+            <button class="toggle-pill" data-v="slow" type="button">Slow</button>
+            <button class="toggle-pill active" data-v="normal" type="button">Normal</button>
+            <button class="toggle-pill" data-v="fast" type="button">Fast</button>
+            <button class="toggle-pill" data-v="veryfast" type="button">Very Fast</button>
+          </div>
+        </div>
+
+        <div class="control-section">
+          <div class="settings-label">String Length</div>
+          <p class="settings-note">How many shapes flash in each string.</p>
+          <div class="toggle-group" id="length" role="group" aria-label="String length">
+            <button class="toggle-pill-circle" data-v="2" type="button">2</button>
+            <button class="toggle-pill-circle" data-v="3" type="button">3</button>
+            <button class="toggle-pill-circle active" data-v="4" type="button">4</button>
+            <button class="toggle-pill-circle" data-v="5" type="button">5</button>
+            <button class="toggle-pill-circle" data-v="6" type="button">6</button>
+            <button class="toggle-pill-circle" data-v="7" type="button">7</button>
+            <button class="toggle-pill-circle" data-v="8" type="button">8</button>
+            <button class="toggle-pill-circle" data-v="9" type="button">9</button>
+            <button class="toggle-pill-circle" data-v="10" type="button">10</button>
+          </div>
+        </div>
+
+        <div class="control-section">
+          <div class="settings-label">Number of Colors</div>
+          <p class="settings-note">Each shape can be any one of these colors.</p>
+          <div class="toggle-group" id="colors" role="group" aria-label="Number of colors">
+            <button class="toggle-pill-circle" data-v="1" type="button">1</button>
+            <button class="toggle-pill-circle" data-v="2" type="button">2</button>
+            <button class="toggle-pill-circle active" data-v="3" type="button">3</button>
+            <button class="toggle-pill-circle" data-v="4" type="button">4</button>
+            <button class="toggle-pill-circle" data-v="5" type="button">5</button>
+            <button class="toggle-pill-circle" data-v="6" type="button">6</button>
+          </div>
+        </div>
+      </section>
+
+      <section class="panel panel--card">
+        <h2 class="panel-title">Shape Pool</h2>
+        <p class="settings-note">Choose the shapes that can appear in a flash string.</p>
+        <div id="pool" class="pool"></div>
+        <div class="pool-actions">
+          <button id="selectAll" class="btn" type="button">Select All</button>
+          <button id="clearAll" class="btn" type="button">Clear All</button>
+        </div>
+        <button id="startFlash" class="launch-btn" type="button">Start Flash</button>
+      </section>
+    </div>
+  </main>
+
+  <!-- Play -->
+  <main id="playScreen" class="app-shell screen" hidden>
+    <header class="app-header play-header">
+      <div class="header-left">
+        <a class="icon-btn" href="../../index.html" data-icon="house" aria-label="Shape Lab home" title="Shape Lab home"></a>
+        <h1 class="brand-name">Shape Flash</h1>
+        <div id="sequence" class="pips" aria-label="Shapes in this string"></div>
+      </div>
+
+      <div class="header-center">
+        <button id="playBtn" class="header-btn header-btn--accent" type="button"></button>
+        <button id="revealBtn" class="header-btn" type="button" disabled><span data-icon="eye"></span>Reveal</button>
+        <button id="nextBtn" class="header-btn" type="button" disabled><span data-icon="skip-forward"></span>Next</button>
+      </div>
+
+      <div class="header-actions">
+        <button id="settingsBtn" class="icon-btn" type="button" data-icon="gear" aria-label="Settings" title="Settings"></button>
+        <button id="playFullscreen" class="icon-btn" type="button" aria-label="Fullscreen" title="Fullscreen"></button>
+      </div>
+    </header>
+
+    <div class="play-main">
+      <div class="flash-left">
+        <section class="panel panel--card stage-panel">
+          <div class="stage-main" id="stageMain"><div id="stageContent" class="stage-content"></div></div>
+        </section>
+        <section class="panel panel--card slots-panel">
+          <div id="slots" class="slots-row"></div>
+        </section>
+      </div>
+
+      <aside class="panel panel--card toolbox">
+        <div class="settings-label">Color</div>
+        <div id="colorRow" class="color-row"></div>
+        <div class="settings-label">Shape</div>
+        <div id="shapeGrid" class="shape-grid"></div>
+        <button id="submitBtn" class="launch-btn" type="button" disabled>Submit</button>
+      </aside>
+    </div>
+  </main>
+
+  <script type="module" src="./flash.js?v=1"></script>
+</body>
+</html>

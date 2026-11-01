@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#F7F2E9">
+  <title>Shape Jumble</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Lexend:wght@500;600;700&family=Nunito:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../assets/css/tokens.css?v=1">
+  <link rel="stylesheet" href="../../assets/css/base.css?v=1">
+  <link rel="stylesheet" href="./jumble.css?v=1">
+</head>
+<body data-game="shape-jumble">
+
+  <!-- Settings -->
+  <main id="settingsScreen" class="app-shell screen">
+    <header class="app-header">
+      <div class="header-left">
+        <a class="icon-btn" href="../../index.html" data-icon="house" aria-label="Shape Lab home" title="Shape Lab home"></a>
+        <h1 class="brand-name">Shape Jumble</h1>
+      </div>
+      <div class="header-actions">
+        <button id="settingsFullscreen" class="icon-btn" type="button" aria-label="Fullscreen" title="Fullscreen"></button>
+      </div>
+    </header>
+
+    <div class="settings-main">
+      <section class="panel panel--card">
+        <h2 class="panel-title">Quiz Settings</h2>
+
+        <div class="control-section">
+          <div class="settings-label">Shapes per Jumble</div>
+          <p class="settings-note">Choose which puzzle sizes can appear.</p>
+          <div class="toggle-group" role="group" aria-label="Shapes per jumble">
+            <button class="toggle-pill-circle" data-count="2" type="button">2</button>
+            <button class="toggle-pill-circle active" data-count="3" type="button">3</button>
+            <button class="toggle-pill-circle active" data-count="4" type="button">4</button>
+            <button class="toggle-pill-circle active" data-count="5" type="button">5</button>
+            <button class="toggle-pill-circle active" data-count="6" type="button">6</button>
+            <button class="toggle-pill-circle" data-count="7" type="button">7</button>
+            <button class="toggle-pill-circle" data-count="8" type="button">8</button>
+            <button class="toggle-pill-circle" data-count="9" type="button">9</button>
+            <button class="toggle-pill-circle" data-count="10" type="button">10</button>
+          </div>
+        </div>
+
+        <div class="control-section">
+          <div class="settings-label">Same Shape Max</div>
+          <p class="settings-note">The most copies of one shape in a jumble. 1 means no repeats.</p>
+          <div class="toggle-group" role="group" aria-label="Same shape max">
+            <button class="toggle-pill-circle" data-max="1" type="button">1</button>
+            <button class="toggle-pill-circle active" data-max="2" type="button">2</button>
+            <button class="toggle-pill-circle" data-max="3" type="button">3</button>
+            <button class="toggle-pill-circle" data-max="4" type="button">4</button>
+            <button class="toggle-pill-circle" data-max="5" type="button">5</button>
+          </div>
+        </div>
+      </section>
+
+      <section class="panel panel--card">
+        <h2 class="panel-title">Appearance</h2>
+
+        <div class="control-section">
+          <div class="settings-label">Style</div>
+          <div class="toggle-group" role="group" aria-label="Shape style">
+            <button class="toggle-pill active" data-setting-style="solid" type="button">Solid</button>
+            <button class="toggle-pill" data-setting-style="low" type="button">Low opacity</button>
+          </div>
+        </div>
+
+        <div class="control-section">
+          <div class="settings-label">Shape Color</div>
+          <div class="swatch-group" role="group" aria-label="Shape color">
+            <button class="swatch" data-setting-color="coral" type="button" aria-label="Coral"><span data-icon="check-bold"></span></button>
+            <button class="swatch active" data-setting-color="grape" type="button" aria-label="Grape"><span data-icon="check-bold"></span></button>
+            <button class="swatch" data-setting-color="leaf" type="button" aria-label="Leaf"><span data-icon="check-bold"></span></button>
+            <button class="swatch" data-setting-color="sky" type="button" aria-label="Sky"><span data-icon="check-bold"></span></button>
+            <button class="swatch" data-setting-color="bubblegum" type="button" aria-label="Bubblegum"><span data-icon="check-bold"></span></button>
+          </div>
+        </div>
+
+        <button id="startQuiz" class="launch-btn" type="button">Start Quiz</button>
+      </section>
+    </div>
+  </main>
+
+  <!-- Play -->
+  <main id="playScreen" class="app-shell screen" hidden>
+    <header class="app-header play-header">
+      <div class="header-left">
+        <a class="icon-btn" href="../../index.html" data-icon="house" aria-label="Shape Lab home" title="Shape Lab home"></a>
+        <h1 class="brand-name">Shape Jumble</h1>
+      </div>
+
+      <p id="headerResult" class="header-result" aria-live="polite">Which shapes?</p>
+
+      <div class="header-actions">
+        <div class="stepper" role="group" aria-label="Jumble spread">
+          <button id="spreadDown" class="stepper-btn" type="button" data-icon="minus-bold" aria-label="Decrease spread"></button>
+          <span id="spreadValue" class="stepper-value">0%</span>
+          <button id="spreadUp" class="stepper-btn" type="button" data-icon="plus-bold" aria-label="Increase spread"></button>
+        </div>
+        <button id="playFullscreen" class="icon-btn" type="button" aria-label="Fullscreen" title="Fullscreen"></button>
+        <button id="settingsButton" class="icon-btn" type="button" data-icon="gear" aria-label="Settings" title="Settings"></button>
+      </div>
+    </header>
+
+    <div class="play-main">
+      <section class="panel panel--card jumble-area">
+        <div id="collage" class="collage"></div>
+      </section>
+
+      <aside class="play-side">
+        <section class="panel panel--card selector">
+          <div class="settings-label">How many of each shape?</div>
+          <div id="guessGrid" class="guess-grid"></div>
+        </section>
+        <button id="submit" class="launch-btn" type="button">Submit</button>
+        <button id="next" class="launch-btn" type="button" hidden>Next Jumble</button>
+      </aside>
+    </div>
+  </main>
+
+  <script type="module" src="./jumble.js?v=1"></script>
+</body>
+</html>

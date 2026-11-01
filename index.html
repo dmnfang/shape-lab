@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#F7F2E9">
+  <title>Shape Lab</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Lexend:wght@500;600;700&family=Nunito:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./assets/css/tokens.css?v=1">
+  <link rel="stylesheet" href="./assets/css/base.css?v=1">
+  <link rel="stylesheet" href="./assets/css/hub.css?v=1">
+</head>
+<body>
+  <main class="app-shell hub">
+    <header class="app-header">
+      <h1 class="brand-name">Shape Lab</h1>
+      <div class="header-actions">
+        <button id="fullscreenButton" class="icon-btn" type="button" aria-label="Fullscreen" title="Fullscreen"></button>
+      </div>
+    </header>
+
+    <section class="game-grid" aria-label="Games">
+      <a class="game-card" data-game="shape-jumble" href="apps/shape-jumble/index.html">
+        <div class="game-art" aria-hidden="true"><div class="art-jumble" id="artJumble"></div></div>
+        <div class="game-text">
+          <h2 class="game-title">Shape Jumble</h2>
+          <p class="game-desc">Look at the overlapping shapes, then guess which shapes are hiding and how many of each.</p>
+        </div>
+        <span class="launch-btn">Play</span>
+      </a>
+
+      <a class="game-card" data-game="shape-flash" href="apps/shape-flash/index.html">
+        <div class="game-art" aria-hidden="true">
+          <div class="art-flash" id="artFlash"></div>
+        </div>
+        <div class="game-text">
+          <h2 class="game-title">Shape Flash</h2>
+          <p class="game-desc">Watch the coloured shapes flash by, then rebuild the string in order from memory.</p>
+        </div>
+        <span class="launch-btn">Play</span>
+      </a>
+    </section>
+  </main>
+
+  <script type="module">
+    import { initViewport, initFullscreen, hydrateIcons } from './assets/js/shared.js?v=1';
+    import { shapeSVG } from './assets/js/shapes.js?v=1';
+    document.getElementById('artJumble').innerHTML = ['circle', 'square', 'triangle', 'star'].map(s => shapeSVG(s)).join('');
+    document.getElementById('artFlash').innerHTML =
+      `<div class="big">${shapeSVG('heart')}</div><div class="slots">` +
+      [['square', 'var(--sky-500)'], ['circle', 'var(--leaf-500)'], ['', ''], ['', '']].map(([s, c]) =>
+        `<div class="slot">${s ? `<span style="color:${c}">${shapeSVG(s)}</span>` : ''}</div>`).join('') + '</div>';
+    initViewport();
+    initFullscreen(document.getElementById('fullscreenButton'));
+    hydrateIcons();
+  </script>
+</body>
+</html>

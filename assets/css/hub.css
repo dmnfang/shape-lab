@@ -1,0 +1,26 @@
+/* hub.css: the Shape Lab home screen. Requires tokens.css + base.css. */
+.hub { gap: 12px; padding: 20px; }
+.game-grid { flex: 1; min-height: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); grid-auto-rows: minmax(0, 1fr); gap: 16px; overflow-y: auto; scrollbar-width: none; }
+.game-grid::-webkit-scrollbar { display: none; }
+.game-card { min-width: 0; min-height: 0; display: flex; flex-direction: column; gap: 16px; padding: 16px; background: var(--surface-card); border: 2px solid var(--stroke-default); border-radius: var(--r-lg); transition: border-color 0.15s; }
+.game-card:active { opacity: 0.85; }
+@media (hover: hover) { .game-card:hover { border-color: var(--accent); } }
+.game-art { flex: 1 1 0; min-height: 120px; container-type: size; display: grid; place-items: center; position: relative; overflow: hidden; background: var(--accent-subtle); border-radius: var(--r-md); }
+.game-text { display: flex; flex-direction: column; gap: 4px; }
+.game-title { font-family: var(--font-display); font-size: 28px; line-height: 32px; font-weight: 500; }
+.game-desc { font-size: 16px; line-height: 24px; color: var(--text-secondary); }
+
+/* Card art: sizes scale with the art box */
+.art-jumble { position: relative; width: 70cqmin; height: 54cqmin; color: var(--accent-strong); }
+.art-jumble svg { position: absolute; width: 34cqmin; height: 34cqmin; opacity: 0.55; }
+.art-jumble svg:nth-child(1) { left: 2%; top: 4%; }
+.art-jumble svg:nth-child(2) { left: 26%; top: 28%; }
+.art-jumble svg:nth-child(3) { left: 50%; top: 2%; }
+.art-jumble svg:nth-child(4) { left: 62%; top: 34%; }
+.art-flash { display: flex; flex-direction: column; align-items: center; gap: 6cqmin; }
+.art-flash .big { width: 38cqmin; height: 38cqmin; color: var(--coral-500); }
+.art-flash .slots { display: flex; gap: 3cqmin; }
+.art-flash .slot { width: 13cqmin; height: 13cqmin; border-radius: 2cqmin; border: 0.9cqmin dashed var(--sand-300); background: var(--surface-card); display: grid; place-items: center; }
+.art-flash .slot svg { width: 8.6cqmin; height: 8.6cqmin; }
+
+@media (max-width: 800px) { .game-grid { grid-template-columns: 1fr; grid-auto-rows: auto; } .game-card { min-height: 360px; } }
