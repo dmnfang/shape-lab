@@ -38,7 +38,7 @@
 .slots-panel { flex: 0 0 auto; padding: 16px; gap: 0; }
 .slots-row, .answer-row { width: 100%; display: grid; grid-template-columns: repeat(var(--n, 4), minmax(0, 1fr)); gap: 12px; align-items: center; }
 .slot, .answer-cell { width: 100%; max-width: 112px; aspect-ratio: 1; justify-self: center; display: grid; place-items: center; border-radius: var(--r-md); }
-.slot { padding: 12%; border: 3px dashed var(--sand-300); background: var(--surface-inset); }
+.slot { padding: 0%; border: 0px dashed var(--sand-300); background: var(--surface-inset); }
 .slot.filled { border-style: solid; background: var(--surface-card); }
 .slot:disabled { cursor: default; }
 .slot .shape-svg, .answer-cell .shape-svg { display: block; width: 100%; height: 100%; }

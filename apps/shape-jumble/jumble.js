@@ -4,7 +4,7 @@ import { initViewport, initFullscreen, hydrateIcons } from '../../assets/js/shar
 import { SHAPES, SHAPE_LABELS, shapeSVG } from '../../assets/js/shapes.js';
 
 const MAX_SPREAD = 10;          // spread stepper runs 0..10 (shown as %)
-const SPREAD_PER_STEP = 0.01;
+const SPREAD_PER_STEP = 0.03;
 const REVEAL_STAGGER_MS = 160;
 
 const settings = {
