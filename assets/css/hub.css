@@ -23,4 +23,11 @@
 .art-flash .slot { width: 13cqmin; height: 13cqmin; border-radius: 2cqmin; border: 0.9cqmin dashed var(--sand-300); background: var(--surface-card); display: grid; place-items: center; }
 .art-flash .slot svg { width: 8.6cqmin; height: 8.6cqmin; }
 
+.art-talk { display: flex; flex-direction: column; align-items: center; gap: 5cqmin; width: 80cqmin; }
+.art-talk .pill { padding: 1.5cqmin 6cqmin; border-radius: 99px; background: var(--surface-card); border: 0.8cqmin solid var(--accent); font: 700 9cqmin var(--font-card); color: var(--accent-strong); }
+.art-talk .duo { display: flex; gap: 4cqmin; }
+.art-talk .duo span { width: 20cqmin; height: 20cqmin; }
+.art-talk .bubble { display: flex; gap: 2cqmin; padding: 3cqmin 4cqmin; border-radius: 6cqmin; background: var(--surface-card); border: 0.8cqmin solid var(--accent); }
+.art-talk .bubble span { width: 14cqmin; height: 14cqmin; }
+.art-talk .bubble.r { align-self: flex-end; border-color: var(--grape-500); }
 @media (max-width: 800px) { .game-grid { grid-template-columns: 1fr; grid-auto-rows: auto; } .game-card { min-height: 360px; } }

@@ -58,6 +58,8 @@ img { display: block; max-width: 100%; max-height: 100%; object-fit: contain; }
 /* Put data-game on <body> (or on a card) and use var(--accent*) everywhere.
    Change a game's colour here and nowhere else. */
 [data-game="shape-jumble"] { --accent: var(--mint-500);   --accent-subtle: var(--mint-50);   --accent-strong: var(--mint-700); }
+[data-game="shape-attack"] { --accent: var(--grape-500);  --accent-subtle: var(--grape-50);  --accent-strong: var(--grape-700); }
+[data-game="shape-rally"]  { --accent: var(--sky-500);    --accent-subtle: var(--sky-50);    --accent-strong: var(--sky-700); }
 [data-game="shape-flash"]  { --accent: var(--orange-500); --accent-subtle: var(--orange-50); --accent-strong: var(--orange-700); }
 
 /* ---- Layout ----------------------------------------------------------- */

@@ -1,0 +1,12 @@
+/* core.css: the little bit of UI that hiroba-core adds (dialog). Uses the tool's own tokens. */
+.hc-dialog { border: 2px solid var(--stroke-default); border-radius: var(--r-lg); padding: 24px; width: min(520px, calc(100vw - 32px)); background: var(--surface-card); color: var(--text-primary); font-family: var(--font-ui); }
+.hc-dialog::backdrop { background: rgba(53, 49, 39, 0.4); }
+.hc-form { display: flex; flex-direction: column; gap: 16px; }
+.hc-title { font-family: var(--font-display); font-size: 24px; font-weight: 500; }
+.hc-note { font-size: 14px; line-height: 20px; color: var(--text-secondary); }
+.hc-field { display: flex; flex-direction: column; gap: 6px; font-size: 14px; font-weight: 700; }
+.hc-field select, .hc-field textarea, .hc-field input { font: inherit; font-weight: 400; color: var(--text-primary); background: var(--surface-card); border: 2px solid var(--stroke-default); border-radius: var(--r-md); padding: 10px 12px; width: 100%; user-select: text; -webkit-user-select: text; }
+.hc-field textarea { resize: vertical; }
+.hc-field select:focus, .hc-field textarea:focus, .hc-field input:focus { outline: none; border-color: var(--stroke-selected); }
+.hc-status { font-size: 14px; font-weight: 800; color: var(--text-secondary); }
+.hc-actions { display: flex; justify-content: flex-end; gap: 8px; }

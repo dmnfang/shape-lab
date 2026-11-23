@@ -26,7 +26,7 @@ const GEOMETRY = {
 };
 
 /* A small outline of the same colour rounds the corners. */
-export function shapeSVG(name, { cls = 'shape-svg', fill = 'currentColor' } = {}) {
+export function shapeSVG(name, { cls = 'shape-svg', fill = 'currentColor', stroke = fill } = {}) {
   return `<svg class="${cls}" viewBox="0 0 100 100" aria-hidden="true" focusable="false">` +
-    `<g fill="${fill}" stroke="${fill}" stroke-width="4" stroke-linejoin="round">${GEOMETRY[name]}</g></svg>`;
+    `<g fill="${fill}" stroke="${stroke}" stroke-width="4" stroke-linejoin="round">${GEOMETRY[name]}</g></svg>`;
 }

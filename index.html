@@ -8,9 +8,9 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Lexend:wght@500;600;700&family=Nunito:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="./assets/css/tokens.css?v=1">
-  <link rel="stylesheet" href="./assets/css/base.css?v=1">
-  <link rel="stylesheet" href="./assets/css/hub.css?v=1">
+  <link rel="stylesheet" href="./assets/css/tokens.css?v=2">
+  <link rel="stylesheet" href="./assets/css/base.css?v=2">
+  <link rel="stylesheet" href="./assets/css/hub.css?v=2">
 </head>
 <body>
   <main class="app-shell hub">
@@ -41,17 +41,40 @@
         </div>
         <span class="launch-btn">Play</span>
       </a>
+
+      <a class="game-card" data-game="shape-attack" href="apps/shape-talk/index.html?mode=attack">
+        <div class="game-art" aria-hidden="true"><div class="art-talk" id="artAttack"></div></div>
+        <div class="game-text">
+          <h2 class="game-title">Shape Attack</h2>
+          <p class="game-desc">Race through the "What do you want?" chain with colored shapes. Fastest team wins.</p>
+        </div>
+        <span class="launch-btn">Play</span>
+      </a>
+
+      <a class="game-card" data-game="shape-rally" href="apps/shape-talk/index.html?mode=rally">
+        <div class="game-art" aria-hidden="true"><div class="art-talk" id="artRally"></div></div>
+        <div class="game-text">
+          <h2 class="game-title">Shape Rally</h2>
+          <p class="game-desc">Keep the conversation going. How many shape orders can you finish before time runs out?</p>
+        </div>
+        <span class="launch-btn">Play</span>
+      </a>
     </section>
   </main>
 
   <script type="module">
-    import { initViewport, initFullscreen, hydrateIcons } from './assets/js/shared.js?v=1';
-    import { shapeSVG } from './assets/js/shapes.js?v=1';
+    import { initCore } from './assets/core/core.js?v=2';
+    import { initViewport, initFullscreen, hydrateIcons } from './assets/js/shared.js?v=2';
+    import { shapeSVG } from './assets/js/shapes.js?v=2';
     document.getElementById('artJumble').innerHTML = ['circle', 'square', 'triangle', 'star'].map(s => shapeSVG(s)).join('');
     document.getElementById('artFlash').innerHTML =
       `<div class="big">${shapeSVG('heart')}</div><div class="slots">` +
       [['square', 'var(--sky-500)'], ['circle', 'var(--leaf-500)'], ['', ''], ['', '']].map(([s, c]) =>
         `<div class="slot">${s ? `<span style="color:${c}">${shapeSVG(s)}</span>` : ''}</div>`).join('') + '</div>';
+    const bubble = (who, svg) => `<div class="bubble ${who}">${svg}</div>`;
+    document.getElementById('artAttack').innerHTML = `<div class="pill">0:42</div><div class="duo"><span style="color:var(--coral-500)">${shapeSVG('star')}</span><span style="color:var(--sky-500)">${shapeSVG('heart')}</span><span style="color:var(--leaf-500)">${shapeSVG('triangle')}</span></div>`;
+    document.getElementById('artRally').innerHTML = bubble('l', `<span style="color:var(--sun-500)">${shapeSVG('circle')}</span><span style="color:var(--sun-500)">${shapeSVG('circle')}</span>`) + bubble('r', `<span style="color:var(--grape-500)">${shapeSVG('diamond')}</span>`);
+    initCore({ tool: 'shape-lab-hub', version: '1.0.0' });
     initViewport();
     initFullscreen(document.getElementById('fullscreenButton'));
     hydrateIcons();

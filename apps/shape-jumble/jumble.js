@@ -2,9 +2,10 @@
    A jumble of overlapping shapes appears. Students guess which shapes are in it AND how many of each. */
 import { initViewport, initFullscreen, hydrateIcons } from '../../assets/js/shared.js';
 import { SHAPES, SHAPE_LABELS, shapeSVG } from '../../assets/js/shapes.js';
+import { initCore, sfx } from '../../assets/core/core.js';
 
 const MAX_SPREAD = 10;          // spread stepper runs 0..10 (shown as %)
-const SPREAD_PER_STEP = 0.03;
+const SPREAD_PER_STEP = 0.01;
 const REVEAL_STAGGER_MS = 160;
 
 const settings = {
@@ -143,6 +144,7 @@ function reveal() {
   const right = present.filter(s => state.guess[s] === state.counts[s]).length;
   const extra = SHAPES.filter(s => state.counts[s] === 0 && state.guess[s] > 0).length;
   const total = state.shapes.length;
+  sfx.play(right === present.length && extra === 0 ? 'celebration' : 'revealAll');
   const strong = document.createElement('strong');
   strong.textContent = `There were ${total} shapes`;
   resultEl.replaceChildren(strong, ` · You got ${right}/${present.length} right${extra ? ` · ${extra} not in the jumble` : ''}`);
@@ -217,10 +219,11 @@ spreadUp.addEventListener('click', () => changeSpread(1));
 $('settingsButton').addEventListener('click', showSettings);
 $('startQuiz').addEventListener('click', startQuiz);
 submitBtn.addEventListener('click', reveal);
-nextBtn.addEventListener('click', makePuzzle);
+nextBtn.addEventListener('click', () => { sfx.play('nextCard'); makePuzzle(); });
 
 new ResizeObserver(() => { if (!playScreen.hidden && state.shapes.length) renderCollage(); }).observe(collage);
 
+initCore({ tool: 'shape-jumble', version: '1.0.0' });
 initViewport();
 initFullscreen($('settingsFullscreen'));
 initFullscreen($('playFullscreen'));

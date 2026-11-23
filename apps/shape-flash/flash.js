@@ -3,6 +3,7 @@
 import { initViewport, initFullscreen, hydrateIcons } from '../../assets/js/shared.js';
 import { icon } from '../../assets/js/icons.js';
 import { SHAPES, SHAPE_LABELS, shapeSVG } from '../../assets/js/shapes.js';
+import { initCore, sfx } from '../../assets/core/core.js';
 
 const COLORS = [
   { id: 'red',    label: 'Red',    css: 'var(--coral-500)' },
@@ -53,6 +54,7 @@ const shapeMarkup = item => `<span style="color:${colorOf(item.color).css}">${sh
 
 function clearStage() { stageContent.innerHTML = ''; }
 function showFlash(item) {
+  sfx.play('tilePop');
   stageContent.innerHTML = `<div class="flash-shape" data-shape="${item.shape}" data-color="${item.color}" style="color:${colorOf(item.color).css}">${shapeSVG(item.shape)}</div>`;
 }
 function showAnswer() {
@@ -184,9 +186,14 @@ function finishRound() {
   setButtons({ play: true, reveal: false, next: true });
   renderAll();
 }
-function submit() { if (canBuild() && isFull()) finishRound(); }
-function reveal() { if (canBuild()) finishRound(); }
-function next() { if (S.playing) return; S.sequence = makeSequence(); setupRound(); }
+function submit() {
+  if (!canBuild() || !isFull()) return;
+  const perfect = S.sequence.every((it, i) => S.guesses[i]?.shape === it.shape && S.guesses[i]?.color === it.color);
+  sfx.play(perfect ? 'celebration' : 'wrong');
+  finishRound();
+}
+function reveal() { if (canBuild()) { sfx.play('revealAll'); finishRound(); } }
+function next() { if (S.playing) return; sfx.play('nextCard'); S.sequence = makeSequence(); setupRound(); }
 
 function startFlash() {
   if (!settings.pool.size) return;
@@ -238,6 +245,7 @@ nextBtn.addEventListener('click', next);
 submitBtn.addEventListener('click', submit);
 $('settingsBtn').addEventListener('click', showSettings);
 
+initCore({ tool: 'shape-flash', version: '1.0.0' });
 initViewport();
 initFullscreen($('settingsFullscreen'));
 initFullscreen($('playFullscreen'));
