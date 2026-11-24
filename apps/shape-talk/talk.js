@@ -87,8 +87,6 @@ function renderSettings() {
     if (solo()) html += group('Rounds', 'limit', OPT.limit);
   }
   $('settingsBody').innerHTML = html;
-  const r = makeRound(null);
-  $('preview').innerHTML = `<div class="script-panel">${scriptHTML(r, isRally ? 'A' : 1, isRally ? 'B' : 2)}</div><div class="mini">${visual(r)}</div>`;
 }
 $('settingsBody').addEventListener('click', e => {
   const b = e.target.closest('[data-k]');
